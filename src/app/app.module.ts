@@ -6,12 +6,14 @@ import {UserPageComponent} from "./user-page/user-page.component";
 import {FormsModule} from "@angular/forms";
 import {BrowserModule} from "@angular/platform-browser";
 import {AppRoutingModule} from "./app-routing.module";
+import { ProductPageComponent } from './product-page/product-page.component';
+import {HttpClientModule} from "@angular/common/http";
 
 
 
 @NgModule({
-  declarations: [AppComponent, UserPageComponent],
-  imports: [CommonModule, RouterModule, FormsModule, BrowserModule, AppRoutingModule  ],
+  declarations: [AppComponent, UserPageComponent, ProductPageComponent],
+  imports: [CommonModule, RouterModule, FormsModule, BrowserModule, AppRoutingModule, HttpClientModule  ],
   providers: [],
   bootstrap: [AppComponent]
 })

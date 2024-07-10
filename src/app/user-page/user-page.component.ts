@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {catchError, Observable, throwError} from "rxjs";
 
 @Component({
   selector: 'app-user-page',
@@ -7,15 +9,45 @@ import { Component } from '@angular/core';
 })
 export class UserPageComponent {
 
+  constructor(private http: HttpClient) {}
+
   private name: string = "";
   public fname: string = "";
-
-  register() {
-
+  public user = {
+    name: "",
+    firstName: ""
   }
 
-  save(event: KeyboardEvent, name: string) {
-    console.log(event);
-    console.log(this.fname);
+  public users: any[] = [];
+  public urlApi: string = "http://localhost:9090/api"
+
+  public httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+  }
+
+
+  register() : void {
+    const u = {
+      name: this.user.name,
+      firstName: this.user.firstName
+    }
+    this.users.push(u)
+    console.table(this.users)
+  }
+
+  save(event: any, name: string) {
+    // console.log(event);
+    console.log(this.user);
+  }
+
+  addUser() {
+    console.log(`prêt à ajouter ${this.user}`)
+    this.http.post(this.urlApi, this.user, this.httpOptions)
+      .pipe(catchError(error => {
+        console.error('Une erreur est survenue :', error);
+        return throwError('Erreur lors de la requête POST.');
+      })).subscribe();
   }
 }
