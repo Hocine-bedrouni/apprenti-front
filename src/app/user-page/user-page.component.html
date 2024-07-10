@@ -1,0 +1,10 @@
+<div>
+  <h1>Add users</h1>
+  <form class="add">
+    <label for="fname">Firstname</label>
+    <input type="text" (keyup)="save($event, 'fname')" id="fname" [(ngModel)]="fname">
+    <label for="name">Name</label>
+    <input type="text" id="name">
+    <button type="button" (click)="register()" >Click</button>
+  </form>
+</div>
