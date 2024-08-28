@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {catchError, Observable, throwError} from "rxjs";
 
@@ -7,7 +7,7 @@ import {catchError, Observable, throwError} from "rxjs";
   templateUrl: './user-page.component.html',
   styleUrls: ['./user-page.component.scss']
 })
-export class UserPageComponent {
+export class UserPageComponent implements OnInit {
 
   constructor(private http: HttpClient) {}
 
@@ -18,8 +18,9 @@ export class UserPageComponent {
     firstName: ""
   }
 
-  public users: any[] = [];
+  public users: { name: string, firstName: string}[] = [];
   public urlApi: string = "http://localhost:9090/api"
+  public urlAPiUsers: string = "http://localhost:9090/api/users"
 
   public httpOptions = {
     headers: new HttpHeaders({
@@ -41,7 +42,11 @@ export class UserPageComponent {
     // console.log(event);
     console.log(this.user);
   }
+  test() {
+    const data: any;
 
+    const tt = Object.assign(new Maclass(), data);
+  }
   addUser() {
     console.log(`prêt à ajouter ${this.user}`)
     this.http.post(this.urlApi, this.user, this.httpOptions)
@@ -50,4 +55,24 @@ export class UserPageComponent {
         return throwError('Erreur lors de la requête POST.');
       })).subscribe();
   }
+
+  getUsers(): Observable<any> {
+   return this.http.get<any>(this.urlAPiUsers);
+  }
+
+  ngOnInit(): void {
+    this.getUsers().subscribe((dat: any) => {
+      dat.forEach((data: any) => {
+        this.users.push({name: data.name, firstName: data.firstName});
+
+      })
+    });
+  }
+
+
+
+}
+
+class Maclass {
+
 }

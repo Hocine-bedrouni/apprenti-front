@@ -1,6 +1,29 @@
+
 .add{
   display: flex;
   gap: 15px;
   flex-direction: column;
   width: 50%;
+}
+
+.form1{
+  background-color:cornflowerblue ;
+  padding-bottom: 15px;
+  display: grid;
+  justify-items: center;
+  //justify-content: center;
+  align-items: center;
+}
+
+input{
+  height: 30px;
+  width: 100%;
+}
+
+button{
+  height: 30px;
+  width: 40%;
+ margin: auto;
+  background-color: lightgray;
+
 }

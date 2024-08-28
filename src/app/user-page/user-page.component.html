@@ -1,5 +1,5 @@
-<div>
-  <h1>Add users</h1>
+<div class="form1">
+  <h1>Ajout de User</h1>
   <form class="add">
     <label for="fname">Firstname</label>
     <input type="text" (keyup.enter)="save($event, 'fname')" id="fname" [(ngModel)]="user.firstName" [ngModelOptions]="{standalone: true}">
@@ -9,4 +9,11 @@
     <button type="button" (click)="addUser()" >Save Bdd</button>
     <span *ngFor="let u of users">{{u.name}} - {{u.firstName}}</span>
   </form>
+</div> <div>
+  <h1>Liste des Users</h1>
+  <ul>
+    <li *ngFor="let user of users">
+      {{ user.name }} ({{ user.firstName }})
+    </li>
+  </ul>
 </div>
