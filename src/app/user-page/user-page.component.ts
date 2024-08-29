@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {catchError, Observable, throwError} from "rxjs";
+import {FormGroup, FormControl} from "@angular/forms";
 
 @Component({
   selector: 'app-user-page',
@@ -9,7 +10,8 @@ import {catchError, Observable, throwError} from "rxjs";
 })
 export class UserPageComponent implements OnInit {
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
 
   private name: string = "";
   public fname: string = "";
@@ -18,8 +20,8 @@ export class UserPageComponent implements OnInit {
     firstName: ""
   }
 
-  public users: { name: string, firstName: string}[] = [];
-  public urlApi: string = "http://localhost:9090/api"
+  public users: { name: string, firstName: string }[] = [];
+  public urlApi: string = "http://localhost:9090/api/user/add"
   public urlAPiUsers: string = "http://localhost:9090/api/users"
 
   public httpOptions = {
@@ -29,7 +31,7 @@ export class UserPageComponent implements OnInit {
   }
 
 
-  register() : void {
+  register(): void {
     const u = {
       name: this.user.name,
       firstName: this.user.firstName
@@ -42,11 +44,13 @@ export class UserPageComponent implements OnInit {
     // console.log(event);
     console.log(this.user);
   }
+
   test() {
-    const data: any;
+    const data: any = "";
 
     const tt = Object.assign(new Maclass(), data);
   }
+
   addUser() {
     console.log(`prêt à ajouter ${this.user}`)
     this.http.post(this.urlApi, this.user, this.httpOptions)
@@ -57,7 +61,7 @@ export class UserPageComponent implements OnInit {
   }
 
   getUsers(): Observable<any> {
-   return this.http.get<any>(this.urlAPiUsers);
+    return this.http.get<any>(this.urlAPiUsers);
   }
 
   ngOnInit(): void {
@@ -69,6 +73,19 @@ export class UserPageComponent implements OnInit {
     });
   }
 
+  public SaveData(value: any) {
+    console.log(this.myForm.value);
+  }
+
+  myForm: FormGroup = new FormGroup({
+    Id: new FormControl(''),
+    Name: new FormControl(''),
+    Salary: new FormControl(''),
+    Address: new FormGroup({
+      City: new FormControl(''),
+      PinCode: new FormControl('')
+    })
+  });
 
 
 }

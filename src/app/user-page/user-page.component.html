@@ -2,14 +2,17 @@
   <h1>Ajout de User</h1>
   <form class="add">
     <label for="fname">Firstname</label>
-    <input type="text" (keyup.enter)="save($event, 'fname')" id="fname" [(ngModel)]="user.firstName" [ngModelOptions]="{standalone: true}">
+    <input type="text" (keyup.enter)="save($event, 'fname')" id="fname" [(ngModel)]="user.firstName"
+           [ngModelOptions]="{standalone: true}">
     <label for="name">Name</label>
-    <input type="text" id="name" (keyup.enter)="save($event, 'fname')" [(ngModel)]="user.name"  [ngModelOptions]="{standalone: true}">
-    <button type="button" (click)="register()" >Click</button>
-    <button type="button" (click)="addUser()" >Save Bdd</button>
+    <input type="text" id="name" (keyup.enter)="save($event, 'fname')" [(ngModel)]="user.name"
+           [ngModelOptions]="{standalone: true}">
+    <button type="button" (click)="register()">Add localy</button>
+    <button type="button" (click)="addUser()">Save Bdd</button>
     <span *ngFor="let u of users">{{u.name}} - {{u.firstName}}</span>
   </form>
-</div> <div>
+</div>
+<div>
   <h1>Liste des Users</h1>
   <ul>
     <li *ngFor="let user of users">
@@ -17,3 +20,10 @@
     </li>
   </ul>
 </div>
+
+
+
+
+
+
+
